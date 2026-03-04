@@ -1,24 +1,50 @@
 {
-  "name": "rizzscript",
-  "version": "1.0.0",
-  "description": "A programming language that compiles vibes, not bugs.",
-  "main": "src/interpreter.js",
-  "bin": {
-    "rizz": "./bin/rizz.js"
-  },
-  "scripts": {
-    "start": "node bin/rizz.js",
-    "hello": "node bin/rizz.js examples/hello.rizz",
-    "test:hello": "node bin/rizz.js examples/hello.rizz",
-    "test:vars": "node bin/rizz.js examples/variables.rizz",
-    "test:cond": "node bin/rizz.js examples/conditionals.rizz",
-    "test:loops": "node bin/rizz.js examples/loops.rizz",
-    "test:funcs": "node bin/rizz.js examples/functions.rizz",
-    "test:class": "node bin/rizz.js examples/classes.rizz",
-    "test:arrays": "node bin/rizz.js examples/arrays.rizz",
-    "test:error": "node bin/rizz.js examples/errors.rizz"
-  },
-  "keywords": ["rizzscript", "esolang", "gen-z", "interpreter", "fun"],
-  "author": "RizzScript Contributors",
-  "license": "MIT"
+    "name": "rizzscript",
+    "version": "1.0.0",
+    "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
+    "main": "src/interpreter.js",
+    "bin": {
+        "rizz": "./bin/rizz.js"
+    },
+    "files": [
+        "bin/",
+        "src/",
+        "examples/",
+        "README.md"
+    ],
+    "scripts": {
+        "start": "node bin/rizz.js",
+        "test:hello": "node bin/rizz.js examples/hello.rizz",
+        "test:vars": "node bin/rizz.js examples/variables.rizz",
+        "test:cond": "node bin/rizz.js examples/conditionals.rizz",
+        "test:loops": "node bin/rizz.js examples/loops.rizz",
+        "test:funcs": "node bin/rizz.js examples/functions.rizz",
+        "test:class": "node bin/rizz.js examples/classes.rizz",
+        "test:arrays": "node bin/rizz.js examples/arrays.rizz",
+        "test:error": "node bin/rizz.js examples/errors.rizz"
+    },
+    "engines": {
+        "node": ">=14"
+    },
+    "keywords": [
+        "rizzscript",
+        "rizz",
+        "esolang",
+        "gen-z",
+        "interpreter",
+        "programming-language",
+        "fun",
+        "meme",
+        "cli"
+    ],
+    "author": "tanish-1",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tanish-1/rizzscript.git"
+    },
+    "homepage": "https://github.com/tanish-1/rizzscript#readme",
+    "bugs": {
+        "url": "https://github.com/tanish-1/rizzscript/issues"
+    }
 }
