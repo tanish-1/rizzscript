@@ -1,0 +1,39 @@
+{
+  "name": "rizzscript",
+  "displayName": "RizzScript Language",
+  "description": "Syntax highlighting and language support for RizzScript (.rizz files)",
+  "version": "1.0.0",
+  "publisher": "tanish-1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "rizz",
+        "aliases": [
+          "RizzScript",
+          "rizz"
+        ],
+        "extensions": [
+          ".rizz"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/icon.png",
+          "dark": "./images/icon.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rizz",
+        "scopeName": "source.rizz",
+        "path": "./syntaxes/rizz.tmLanguage.json"
+      }
+    ]
+  }
+}

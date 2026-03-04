@@ -1,10 +1,10 @@
 {
     "name": "rizzscript",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
     "main": "src/interpreter.js",
     "bin": {
-        "rizz": "./bin/rizz.js"
+        "rizz": "bin/rizz.js"
     },
     "files": [
         "bin/",
@@ -41,7 +41,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/tanish-1/rizzscript.git"
+        "url": "git+https://github.com/tanish-1/rizzscript.git"
     },
     "homepage": "https://github.com/tanish-1/rizzscript#readme",
     "bugs": {
