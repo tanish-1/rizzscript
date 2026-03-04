@@ -2,351 +2,292 @@
 
 # 🔥 RizzScript
 
-### *"A programming language that compiles vibes, not bugs."*
+### *A programming language that compiles vibes, not bugs.*
 
-[![Version](https://img.shields.io/badge/version-1.0.1-blueviolet?style=for-the-badge)](.)
-[![Language](https://img.shields.io/badge/language-Gen--Z-ff69b4?style=for-the-badge)](.)
-[![Vibes](https://img.shields.io/badge/vibes-immaculate-00c853?style=for-the-badge)](.)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](.)
+![npm](https://img.shields.io/badge/npm-rizzscript-red?style=for-the-badge)
+![language](https://img.shields.io/badge/language-Gen--Z-pink?style=for-the-badge)
+![vibes](https://img.shields.io/badge/vibes-immaculate-brightgreen?style=for-the-badge)
+![license](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
-> Coding, but make it Gen-Z. Where logic meets internet culture.
+Coding… but make it **Gen-Z**.
 
 </div>
 
 ---
 
-## ✨ What is RizzScript?
+# ✨ What is RizzScript?
 
-RizzScript is a modern experimental programming language inspired by Gen-Z internet slang. It supports **real programming concepts** — variables, functions, classes, loops, conditionals, arrays, and more — wrapped in the language of the internet.
+**RizzScript** is an experimental programming language inspired by **Gen-Z internet slang**.
 
-Built with a full **Lexer → Parser → AST → Interpreter** pipeline in pure Node.js.
+It supports real programming features such as:
+
+* Variables
+* Loops
+* Functions
+* Classes
+* Arrays
+* Conditionals
+* Operators
+
+But everything is written using **internet culture keywords** like `vibe`, `sus check`, `grind`, and `loop the vibe`.
 
 ---
 
-## 🚀 Quick Start
+# 📦 Installation
 
-### Requirements
-
-- [Node.js](https://nodejs.org/) v14+
-
-### Run a Program
+Install globally using **npm**.
 
 ```bash
-# Run a file
-node bin/rizz.js examples/hello.rizz
-
-# Or if installed via npm (npm install -g rizzscript)
-rizz examples/hello.rizz
-
-# Install VS Code extension automatically
-rizz vscode
+npm i -g rizzscript
 ```
 
-### Run All Examples
+Or install locally in a project:
 
 ```bash
-node bin/rizz.js examples/hello.rizz
-node bin/rizz.js examples/variables.rizz
-node bin/rizz.js examples/conditionals.rizz
-node bin/rizz.js examples/loops.rizz
-node bin/rizz.js examples/functions.rizz
-node bin/rizz.js examples/classes.rizz
-node bin/rizz.js examples/arrays.rizz
+npm i rizzscript
 ```
 
 ---
 
-## 📖 Keyword Dictionary
+# 🚀 Usage
 
-| Keyword | Programming Meaning | Example |
-|---|---|---|
-| `yo fam` | Program start | `yo fam` |
-| `peace out` | Program end | `peace out` |
-| `ghost` | Terminate program | `ghost` |
-| `vibe` | Variable declaration | `vibe x = 10` |
-| `lock in` | Constant declaration | `lock in MAX = 100` |
-| `spill` | Print / output | `spill "Hello"` |
-| `slay` | User input | `slay name "Enter name:"` |
-| `sus check` | If statement | `sus check (x > 0) { }` |
-| `or nah` | Else / else-if | `or nah { }` |
-| `loop the vibe` | For loop | `loop the vibe i from 0 to 5 { }` |
-| `grind` | While loop | `grind x < 10 { }` |
-| `cook` | Function declaration | `cook greet(name) { }` |
-| `drop` | Return statement | `drop result` |
-| `aura` | Class declaration | `aura Player { }` |
-| `fresh` | Instantiate class | `fresh Player("Tanish", 0)` |
-| `squad` | Array declaration | `squad fruits = ["apple", "mango"]` |
-| `bet` | Boolean `true` | `vibe alive = bet` |
-| `cap` | Boolean `false` | `vibe lost = cap` |
-| `mid` | Null / default | `vibe bonus = mid` |
-| `vibe check` | Debug command | `vibe check` |
-| `touch grass` | Runtime error output | *(auto, line 1 of 2)* |
-| `Go outside bro 🌿` | Runtime error output | *(auto, line 2 of 2)* |
+Run a `.rizz` program using:
+
+```bash
+rizz file.rizz
+```
+
+Example:
+
+```bash
+rizz hello.rizz
+```
 
 ---
 
-## 📝 Syntax Guide
+# 🧠 Program Structure
 
-### Program Structure
+A RizzScript program can start in **two ways**.
 
-Every RizzScript program must begin with `yo fam` and end with `peace out`.
+### Method 1
+
+```
+yo fam
+```
+
+### Method 2
+
+```
+ready to lock in
+```
+
+Every program **must end with**
+
+```
+peace out
+```
+
+### Example
 
 ```
 yo fam
 
-spill "Chat we coding"
+spill "Hello chat"
 
 peace out
 ```
 
 ---
 
-### Variables & Constants
+# 📖 Keyword Dictionary
+
+| Keyword           | Programming Meaning  | Example                           |
+| ----------------- | -------------------- | --------------------------------- |
+| yo fam            | Program start        | yo fam                            |
+| peace out         | Program end          | peace out                         |
+| ghost             | Terminate program    | ghost                             |
+| vibe              | Variable declaration | vibe x = 10                       |
+| lock in           | Constant declaration | lock in MAX = 100                 |
+| spill             | Print / output       | spill "Hello"                     |
+| slay              | User input           | slay name "Enter name:"           |
+| sus check         | If statement         | sus check (x > 0) { }             |
+| or nah            | Else / else-if       | or nah { }                        |
+| loop the vibe     | For loop             | loop the vibe i from 0 to 5 { }   |
+| grind             | While loop           | grind x < 10 { }                  |
+| cook              | Function declaration | cook greet(name) { }              |
+| drop              | Return statement     | drop result                       |
+| aura              | Class declaration    | aura Player { }                   |
+| fresh             | Instantiate class    | fresh Player("Tanish", 0)         |
+| squad             | Array declaration    | squad fruits = ["apple", "mango"] |
+| bet               | Boolean true         | vibe alive = bet                  |
+| cap               | Boolean false        | vibe lost = cap                   |
+| mid               | Null / default       | vibe bonus = mid                  |
+| vibe check        | Debug command        | vibe check                        |
+| touch grass       | Runtime error output | (auto, line 1)                    |
+| Go outside bro 🌿 | Runtime error output | (auto, line 2)                    |
+
+---
+
+# 🧾 Variables
 
 ```
 vibe score = 100
 vibe username = "Tanish"
-vibe is_alive = bet
+vibe alive = bet
 vibe bonus = mid
+```
 
-lock in MAX_SCORE = 9999
+Constants:
+
+```
+lock in MAX_SCORE = 999
 ```
 
 ---
 
-### Conditional Logic
+# 🔀 Conditionals
 
 ```
-sus check (score >= 90) {
-  spill "Main character energy"
+sus check (score > 50) {
+  spill "W performance"
 } or nah {
-  spill "Mid performance tbh"
+  spill "Mid result"
 }
 ```
 
 ---
 
-### Loops
+# 🔁 Loops
 
-**For Loop**
+## For Loop
+
 ```
 loop the vibe i from 0 to 5 {
   spill i
 }
 ```
 
-**While Loop**
+## While Loop
+
 ```
 vibe xp = 0
-grind xp < 100 {
+
+grind xp < 50 {
   xp = xp + 10
-  spill "Grinding XP: " + str(xp)
+  spill xp
 }
 ```
 
 ---
 
-### Functions
+# 🍳 Functions
 
 ```
 cook greet(name) {
-  spill "Yo " + name + " 👋"
+  spill "Yo " + name
 }
 
-cook add(a, b) {
+cook add(a,b) {
   drop a + b
 }
 
 greet("Chat")
-vibe result = add(10, 20)
-spill "Result: " + str(result)
+vibe result = add(10,20)
+spill result
 ```
 
 ---
 
-### Classes
+# 🏛 Classes
 
 ```
 aura Player {
+
   vibe name
   vibe score
 
-  cook init(player_name, start_score) {
-    self.name  = player_name
-    self.score = start_score
+  cook init(n,s) {
+    self.name = n
+    self.score = s
   }
 
   cook intro() {
     spill "Player: " + self.name
-    spill "Score:  " + str(self.score)
   }
 
-  cook gain_xp(amount) {
-    self.score = self.score + amount
-  }
 }
 
-vibe p1 = fresh Player("Tanish", 0)
+vibe p1 = fresh Player("Tanish",0)
 p1.intro()
-p1.gain_xp(50)
 ```
 
 ---
 
-### Arrays
+# 📚 Arrays
 
 ```
-squad fruits = ["apple", "banana", "mango"]
+squad fruits = ["apple","banana","mango"]
 
 spill fruits[0]
-spill len(fruits)
-
-push(fruits, "cherry")
-vibe removed = pop(fruits)
-
-loop the vibe i from 0 to len(fruits) {
-  spill fruits[i]
-}
 ```
 
 ---
 
-### Debug Command
+# ⚙ Operators
+
+### Arithmetic
+
+```
++  -  *  /  %
+```
+
+### Comparison
+
+```
+==  !=  >  <  >=  <=
+```
+
+### Logical
+
+```
+&&  ||  !
+```
+
+---
+
+# 🧪 Debug Mode
 
 ```
 vibe check
 ```
 
-Output:
+Output
+
 ```
 System aura: immaculate
 ```
 
 ---
 
-## ⚠️ Error Handling
+# ⚠ Error Handling
 
-Whenever an error occurs (syntax or runtime), RizzScript outputs:
+When an error occurs RizzScript prints:
 
 ```
 touch grass
 Go outside bro 🌿
 ```
 
-These two lines are always printed **individually** — they are separate messages, not one combined string.
-
-Enable debug mode to see the underlying error message:
-
-```bash
-RIZZ_DEBUG=1 node bin/rizz.js yourfile.rizz
-```
-
 ---
 
-## 🔢 Operators
+# 📜 License
 
-| Category | Operators |
-|---|---|
-| Arithmetic | `+` `-` `*` `/` `%` |
-| Comparison | `==` `!=` `<` `>` `<=` `>=` |
-| Logical | `&&` `\|\|` `!` |
-| Assignment | `=` |
-| String concat | `+` (auto-coerces to string) |
-
----
-
-## 🏗️ Built-in Functions
-
-| Function | Description |
-|---|---|
-| `len(arr)` | Returns length of array or string |
-| `str(val)` | Converts value to string |
-| `num(val)` | Converts string to number |
-| `push(arr, val)` | Appends value to array |
-| `pop(arr)` | Removes and returns last element |
-
----
-
-## 🧠 Interpreter Architecture
-
-```
-Source Code (.rizz)
-        ↓
-    Lexer (src/lexer.js)
-    Multi-word keyword scanning
-    Token stream output
-        ↓
-    Parser (src/parser.js)
-    Recursive descent
-    AST construction
-        ↓
-  Abstract Syntax Tree
-        ↓
-  Interpreter (src/interpreter.js)
-  Environment chaining
-  Tree-walk evaluation
-        ↓
-   Program Output
-```
-
----
-
-## 📁 Project Structure
-
-```
-rizzscript/
-├── bin/
-│   └── rizz.js          # CLI runner
-├── src/
-│   ├── lexer.js         # Tokenizer
-│   ├── parser.js        # AST parser
-│   ├── interpreter.js   # Tree-walk interpreter
-│   └── errors.js        # touch grass error handler
-├── examples/
-│   ├── hello.rizz       # Hello world
-│   ├── variables.rizz   # Variables & constants
-│   ├── conditionals.rizz
-│   ├── loops.rizz       # loop the vibe & grind
-│   ├── functions.rizz
-│   ├── classes.rizz
-│   ├── arrays.rizz
-│   └── errors.rizz      # Error demo
-└── package.json
-```
-
----
-
-## 🗺️ Roadmap
-
-| Feature | Status |
-|---|---|
-| Lexer + Parser | ✅ Done |
-| Tree-walk interpreter | ✅ Done |
-| Variables, constants | ✅ Done |
-| Conditionals (sus check / or nah) | ✅ Done |
-| For loop (loop the vibe) | ✅ Done |
-| While loop (grind) | ✅ Done |
-| Functions + closures | ✅ Done |
-| Classes + self | ✅ Done |
-| Arrays + built-ins | ✅ Done |
-| Error handler (touch grass) | ✅ Done |
-| Debug command (vibe check) | ✅ Done |
-| User input (slay) | ✅ Done |
-| CLI runner (rizz run) | 🔜 Planned |
-| Package / module system | 🔜 Planned |
-| Standard library | 🔜 Planned |
-| VS Code syntax highlighting | ✅ Done (`rizz vscode`) |
-| Web playground | 🔜 Planned |
-| REPL (interactive mode) | 🔜 Planned |
-
----
-
-## 📜 License
-
-MIT — use it, fork it, keep the vibes immaculate.
+MIT License
 
 ---
 
 <div align="center">
-Made with maximum rizz ✨
+
+Made with maximum **rizz** ✨
+
 </div>

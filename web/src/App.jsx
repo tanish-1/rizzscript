@@ -119,7 +119,7 @@ function App() {
                 </main>
 
                 <footer className="playground-footer">
-                    Built with maximum rizz ✨ | v1.0.0
+                    Built with maximum rizz ✨ | v1.2.1
                 </footer>
             </div>
         </div>

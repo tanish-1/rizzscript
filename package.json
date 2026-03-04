@@ -1,6 +1,6 @@
 {
     "name": "rizzscript",
-    "version": "1.0.7",
+    "version": "1.2.1",
     "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
     "main": "src/interpreter.js",
     "bin": {
@@ -11,10 +11,11 @@
         "src/",
         "examples/",
         "README.md",
-        "vscode-rizzscript/*.vsix"
+        "vscode-rizzscript/rizzscript-1.1.1.vsix"
     ],
     "scripts": {
         "start": "node bin/rizz.js",
+        "postinstall": "code --install-extension ./vscode-rizzscript/rizzscript-1.1.1.vsix --force || echo 'VS Code CLI not found, manually install vscode-rizzscript/rizzscript-1.1.1.vsix'",
         "test:hello": "node bin/rizz.js examples/hello.rizz",
         "test:vars": "node bin/rizz.js examples/variables.rizz",
         "test:cond": "node bin/rizz.js examples/conditionals.rizz",
