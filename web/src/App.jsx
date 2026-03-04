@@ -26,6 +26,7 @@ function App() {
         setIsRunning(true);
 
         // Minimal delay to ensure UI updates before heavy lifting
+        //demo
         await new Promise(r => setTimeout(r, 10));
 
         const logs = [];
