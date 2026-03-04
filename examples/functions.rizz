@@ -1,0 +1,53 @@
+yo fam
+
+// Functions in RizzScript — cook & drop
+
+// Basic function
+cook greet(name) {
+  spill "Yo " + name + " 👋"
+}
+
+greet("Chat")
+greet("Bestie")
+
+// Function with return value
+cook add(a, b) {
+  drop a + b
+}
+
+vibe result = add(10, 20)
+spill "10 + 20 = " + str(result)
+
+// Recursive function (factorial)
+cook factorial(n) {
+  sus check (n <= 1) {
+    drop 1
+  }
+  drop n * factorial(n - 1)
+}
+
+spill "5! = " + str(factorial(5))
+
+// Function with multiple params
+cook introduce(name, age, vibe_level) {
+  spill "Name: " + name
+  spill "Age: " + str(age)
+  spill "Vibe level: " + str(vibe_level) + "/10"
+}
+
+introduce("Tanish", 18, 10)
+
+// Higher-order: function passing result
+cook double(x) {
+  drop x * 2
+}
+
+cook apply_twice(fn_val, x) {
+  drop fn_val(fn_val(x))
+}
+
+// Note: passing functions as values
+vibe doubled_4_times = add(double(2), double(2))
+spill "double(2) + double(2) = " + str(doubled_4_times)
+
+peace out

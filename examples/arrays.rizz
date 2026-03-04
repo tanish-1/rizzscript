@@ -1,0 +1,46 @@
+yo fam
+
+// Arrays in RizzScript — squad
+
+squad fruits = ["apple", "banana", "mango", "cherry"]
+
+// Access by index
+spill "First fruit: " + fruits[0]
+spill "Second fruit: " + fruits[1]
+
+// Length
+spill "Total fruits: " + str(len(fruits))
+
+// Loop over array
+spill "--- All fruits ---"
+loop the vibe i from 0 to len(fruits) {
+  spill str(i) + ". " + fruits[i]
+}
+
+// Mutate element
+fruits[2] = "watermelon"
+spill "After swap: " + fruits[2]
+
+// Push / pop
+push(fruits, "grape")
+spill "After push: " + str(len(fruits)) + " items"
+
+vibe removed = pop(fruits)
+spill "Popped: " + removed
+
+// Array of numbers
+squad scores = [95, 80, 72, 100, 88]
+
+vibe total = 0
+loop the vibe j from 0 to len(scores) {
+  total = total + scores[j]
+}
+
+vibe average = total / len(scores)
+spill "Average score: " + str(average)
+
+// Nested arrays (squad of squads)
+squad matrix = [[1, 2], [3, 4], [5, 6]]
+spill "matrix[1][0] = " + str(matrix[1][0])
+
+peace out

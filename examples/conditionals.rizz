@@ -1,0 +1,44 @@
+yo fam
+
+// Conditional logic — sus check / or nah
+
+vibe score = 95
+
+sus check (score == 100) {
+  spill "Literally perfect — no cap bestie"
+}
+
+sus check (score >= 90) {
+  spill "Main character energy detected"
+} or nah {
+  spill "Mid performance tbh"
+}
+
+// Nested conditions
+vibe rank = "S"
+
+sus check (rank == "S") {
+  spill "S rank? Absolute rizz"
+} or nah {
+  sus check (rank == "A") {
+    spill "A rank — still W"
+  } or nah {
+    spill "Keep grinding bestie"
+  }
+}
+
+// Boolean operators
+vibe has_pass = bet
+vibe is_vip   = cap
+
+sus check (has_pass == bet && is_vip == cap) {
+  spill "Access granted (no VIP needed)"
+}
+
+sus check (has_pass == cap || is_vip == bet) {
+  spill "Alternative access"
+} or nah {
+  spill "Main access route confirmed"
+}
+
+peace out

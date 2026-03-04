@@ -1,0 +1,69 @@
+yo fam
+
+// Classes in RizzScript — aura, fresh
+
+aura Player {
+  vibe name
+  vibe score
+
+  cook init(player_name, start_score) {
+    self.name  = player_name
+    self.score = start_score
+  }
+
+  cook intro() {
+    spill "Player: " + self.name
+    spill "Score:  " + str(self.score)
+  }
+
+  cook gain_xp(amount) {
+    self.score = self.score + amount
+    spill self.name + " gained " + str(amount) + " XP! Total: " + str(self.score)
+  }
+
+  cook is_winning(opponent_score) {
+    sus check (self.score > opponent_score) {
+      drop bet
+    } or nah {
+      drop cap
+    }
+  }
+}
+
+// Create instances
+vibe p1 = fresh Player("Tanish", 0)
+vibe p2 = fresh Player("Rival", 80)
+
+p1.intro()
+p2.intro()
+
+p1.gain_xp(50)
+p1.gain_xp(40)
+
+spill "---"
+vibe p1_winning = p1.is_winning(p2.score)
+sus check (p1_winning == bet) {
+  spill p1.name + " is in the lead 🔥"
+} or nah {
+  spill p2.name + " is ahead — keep grinding"
+}
+
+// Another class
+aura Item {
+  vibe item_name
+  vibe rarity
+
+  cook init(n, r) {
+    self.item_name = n
+    self.rarity    = r
+  }
+
+  cook describe() {
+    spill "[" + self.rarity + "] " + self.item_name
+  }
+}
+
+vibe sword = fresh Item("Rizz Blade", "Legendary")
+sword.describe()
+
+peace out

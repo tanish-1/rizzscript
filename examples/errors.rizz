@@ -1,0 +1,9 @@
+yo fam
+
+// This program contains intentional syntax errors
+// to demonstrate the RizzScript error handler.
+
+// The following line is broken — missing quotes around Hello
+spill Hello
+
+peace out

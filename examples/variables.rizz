@@ -1,0 +1,32 @@
+yo fam
+
+// Variables and constants in RizzScript
+
+vibe username = "Tanish"
+vibe score    = 100
+vibe level    = 1
+
+spill "Player: " + username
+spill "Score:  " + str(score)
+spill "Level:  " + str(level)
+
+// Update a variable
+score = score + 50
+spill "New score: " + str(score)
+
+// Constants — cannot be changed
+lock in MAX_SCORE = 9999
+spill "Max possible score: " + str(MAX_SCORE)
+
+// Null / default value
+vibe powerup = mid
+spill "Powerup: " + str(powerup)
+
+// Booleans
+vibe is_alive = bet
+vibe is_banned = cap
+
+spill "Alive: " + str(is_alive)
+spill "Banned: " + str(is_banned)
+
+peace out
