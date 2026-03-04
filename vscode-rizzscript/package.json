@@ -10,10 +10,8 @@
   "categories": [
     "Programming Languages"
   ],
+  "icon": "images/rlogo2.png",
   "main": "./extension.js",
-  "activationEvents": [
-    "onLanguage:rizz"
-  ],
   "contributes": {
     "languages": [
       {
@@ -27,9 +25,16 @@
         ],
         "configuration": "./language-configuration.json",
         "icon": {
-          "light": "./images/icon.png",
-          "dark": "./images/icon.png"
+          "light": "./images/rlogo2.png",
+          "dark": "./images/rlogo2.png"
         }
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "rizzscript-icons",
+        "label": "RizzScript File Icons",
+        "path": "./icon-theme.json"
       }
     ],
     "grammars": [

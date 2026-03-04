@@ -127,12 +127,18 @@ body {
     gap: 0.8rem;
 }
 
+.logo-img {
+    height: 32px;
+    width: auto;
+}
+
 .logo h1 {
     margin: 0;
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: -1px;
     background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

@@ -65,7 +65,7 @@ function App() {
             <div className="main-content">
                 <header className="playground-header">
                     <div className="logo">
-                        <span className="emoji">🔥</span>
+                        <img src="/rlogo2.png" alt="RizzScript Logo" className="logo-img" />
                         <h1>RizzScript <small>Playground</small></h1>
                     </div>
                     <div className="header-actions">
