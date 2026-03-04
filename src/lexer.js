@@ -86,6 +86,7 @@ const TokenType = {
 
 // Multi-word keywords: order matters — longer first so greedy match wins
 const MULTI_KEYWORDS = [
+    ['ready to lock in', TokenType.PROGRAM_START],
     ['yo fam', TokenType.PROGRAM_START],
     ['peace out', TokenType.PROGRAM_END],
     ['sus check', TokenType.IF],

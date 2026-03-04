@@ -3,7 +3,7 @@ import { Lexer } from './src/rizz/lexer.js';
 
 const code = `ready to lock in
 spill "testing"
-we out`;
+peace out`;
 
 try {
     const lexer = new Lexer(code);

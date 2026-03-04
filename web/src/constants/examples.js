@@ -8,7 +8,7 @@ spill "A programming language that compiles vibes, not bugs."
 
 vibe check
 
-we out`,
+peace out`,
 
   "Variables": `ready to lock in
 
@@ -41,7 +41,7 @@ vibe is_banned = cap
 spill "Alive: " + str(is_alive)
 spill "Banned: " + str(is_banned)
 
-we out`,
+peace out`,
 
   "Conditionals": `ready to lock in
 
@@ -86,7 +86,7 @@ sus check (has_pass == cap || is_vip == bet) {
   spill "Main access route confirmed"
 }
 
-we out`,
+peace out`,
 
   "Loops & Grinding": `ready to lock in
 
@@ -121,7 +121,7 @@ grind count > 0 {
 }
 spill "GOOOO 🔥"
 
-we out`,
+peace out`,
 
   "Functions": `ready to lock in
 
@@ -143,7 +143,7 @@ cook factorial(n) {
 
 spill "5! = " + str(factorial(5))
 
-we out`,
+peace out`,
 
   "Classes (Aura)": `ready to lock in
 
@@ -167,7 +167,7 @@ vibe p1 = fresh Player("Tanish")
 p1.gain_xp(50)
 p1.gain_xp(40)
 
-we out`,
+peace out`,
 
   "Async Chill": `ready to lock in
 
@@ -180,5 +180,5 @@ spill "Still waiting..."
 chill(2000)
 spill "W vibes incoming! 🔥"
 
-we out`
+peace out`
 };

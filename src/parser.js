@@ -41,7 +41,7 @@ class Parser {
 
     /* ─── Entry point ─── */
     parse() {
-        this.consume(TokenType.PROGRAM_START, 'Program must start with "yo fam"');
+        this.consume(TokenType.PROGRAM_START, 'Program must start with "ready to lock in" or "yo fam"');
         const body = [];
         while (!this.isAtEnd() && !this.check(TokenType.PROGRAM_END)) {
             const stmt = this.statement();

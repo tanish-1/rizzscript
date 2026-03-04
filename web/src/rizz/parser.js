@@ -41,13 +41,13 @@ class Parser {
 
     /* ─── Entry point ─── */
     parse() {
-        this.consume(TokenType.PROGRAM_START, 'Program must start with "ready to lock in"');
+        this.consume(TokenType.PROGRAM_START, 'Program must start with "ready to lock in" or "yo fam"');
         const body = [];
         while (!this.isAtEnd() && !this.check(TokenType.PROGRAM_END)) {
             const stmt = this.statement();
             if (stmt) body.push(stmt);
         }
-        if (!this.isAtEnd()) this.consume(TokenType.PROGRAM_END, 'Expected "we out"');
+        if (!this.isAtEnd()) this.consume(TokenType.PROGRAM_END, 'Expected "peace out"');
         return { type: 'Program', body };
     }
 
