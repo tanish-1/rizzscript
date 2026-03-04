@@ -4,7 +4,7 @@
 
 ### *"A programming language that compiles vibes, not bugs."*
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blueviolet?style=for-the-badge)](.)
+[![Version](https://img.shields.io/badge/version-1.0.1-blueviolet?style=for-the-badge)](.)
 [![Language](https://img.shields.io/badge/language-Gen--Z-ff69b4?style=for-the-badge)](.)
 [![Vibes](https://img.shields.io/badge/vibes-immaculate-00c853?style=for-the-badge)](.)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](.)
@@ -328,7 +328,7 @@ rizzscript/
 | CLI runner (rizz run) | 🔜 Planned |
 | Package / module system | 🔜 Planned |
 | Standard library | 🔜 Planned |
-| VS Code syntax highlighting | 🔜 Planned |
+| VS Code syntax highlighting | ✅ Done |
 | Web playground | 🔜 Planned |
 | REPL (interactive mode) | 🔜 Planned |
 
