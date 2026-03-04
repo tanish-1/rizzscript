@@ -1,7 +1,7 @@
 // src/parser.js — RizzScript Recursive-Descent Parser
 // Converts token stream into an Abstract Syntax Tree (AST).
 
-const { TokenType } = require('./lexer');
+import { TokenType } from './lexer.js';
 
 class Parser {
     constructor(tokens) {
@@ -41,13 +41,13 @@ class Parser {
 
     /* ─── Entry point ─── */
     parse() {
-        this.consume(TokenType.PROGRAM_START, 'Program must start with "yo fam"');
+        this.consume(TokenType.PROGRAM_START, 'Program must start with "ready to lock in"');
         const body = [];
         while (!this.isAtEnd() && !this.check(TokenType.PROGRAM_END)) {
             const stmt = this.statement();
             if (stmt) body.push(stmt);
         }
-        if (!this.isAtEnd()) this.consume(TokenType.PROGRAM_END, 'Expected "peace out"');
+        if (!this.isAtEnd()) this.consume(TokenType.PROGRAM_END, 'Expected "we out"');
         return { type: 'Program', body };
     }
 
@@ -423,4 +423,4 @@ class Parser {
     }
 }
 
-module.exports = { Parser };
+export { Parser };

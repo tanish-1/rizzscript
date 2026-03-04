@@ -47,11 +47,11 @@ class RizzFunction {
         this.closure = closure;
     }
 
-    call(interp, args) {
+    async call(interp, args) {
         const env = new Environment(this.closure);
         this.params.forEach((p, i) => env.define(p, args[i] !== undefined ? args[i] : null));
         try {
-            interp.execBlock(this.body, env);
+            await interp.execBlock(this.body, env);
         } catch (e) {
             if (e instanceof ReturnSignal) return e.value;
             throw e;
@@ -70,12 +70,12 @@ class RizzClass {
         this.fields = fields;  // Array of { name, initExpr } resolved later
     }
 
-    instantiate(interp, args) {
+    async instantiate(interp, args) {
         const instance = new RizzInstance(this);
         // Initialise declared fields
-        this.fields.forEach(f => {
-            instance.props[f.name] = f.init ? interp.eval(f.init) : null;
-        });
+        for (const f of this.fields) {
+            instance.props[f.name] = f.init ? await interp.eval(f.init) : null;
+        }
         // Call init() constructor if exists
         if (this.methods.has('init')) {
             const ctor = this.methods.get('init');
@@ -83,7 +83,7 @@ class RizzClass {
             env.define('self', instance);
             ctor.params.forEach((p, i) => env.define(p, args[i] !== undefined ? args[i] : null));
             try {
-                interp.execBlock(ctor.body, env);
+                await interp.execBlock(ctor.body, env);
             } catch (e) {
                 if (!(e instanceof ReturnSignal)) throw e;
             }
@@ -124,12 +124,12 @@ class BoundMethod {
         this.instance = instance;
     }
 
-    call(interp, args) {
+    async call(interp, args) {
         const env = new Environment(this.fn.closure);
         env.define('self', this.instance);
         this.fn.params.forEach((p, i) => env.define(p, args[i] !== undefined ? args[i] : null));
         try {
-            interp.execBlock(this.fn.body, env);
+            await interp.execBlock(this.fn.body, env);
         } catch (e) {
             if (e instanceof ReturnSignal) return e.value;
             throw e;
@@ -154,7 +154,7 @@ class Interpreter {
     _defineBuiltins() {
         // len(arr)
         this.global.define('len', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 const a = args[0];
                 if (typeof a === 'string' || Array.isArray(a)) return a.length;
                 if (a && typeof a === 'object') return Object.keys(a).length;
@@ -165,13 +165,13 @@ class Interpreter {
 
         // str(val)
         this.global.define('str', {
-            call: (_, args) => this.stringify(args[0]),
+            call: async (_, args) => this.stringify(args[0]),
             toString: () => '[built-in: str]'
         });
 
         // num(val)
         this.global.define('num', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 const n = parseFloat(args[0]);
                 if (isNaN(n)) throw new Error(`Cannot convert "${args[0]}" to a number`);
                 return n;
@@ -181,7 +181,7 @@ class Interpreter {
 
         // push(arr, val)
         this.global.define('push', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 if (!Array.isArray(args[0])) throw new Error('push() needs a squad as first arg');
                 args[0].push(args[1]);
                 return args[0];
@@ -191,7 +191,7 @@ class Interpreter {
 
         // pop(arr)
         this.global.define('pop', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 if (!Array.isArray(args[0])) throw new Error('pop() needs a squad as first arg');
                 return args[0].pop();
             },
@@ -200,7 +200,7 @@ class Interpreter {
 
         // rng(min, max)
         this.global.define('rng', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 const min = Math.ceil(args[0] || 0);
                 const max = Math.floor(args[1] || 100);
                 return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -210,12 +210,9 @@ class Interpreter {
 
         // chill(ms)
         this.global.define('chill', {
-            call: (_, args) => {
+            call: async (_, args) => {
                 const ms = args[0] || 1000;
-                // Synchronous sleep using Atomics
-                const sab = new SharedArrayBuffer(4);
-                const int32 = new Int32Array(sab);
-                Atomics.wait(int32, 0, 0, ms);
+                await new Promise(resolve => setTimeout(resolve, ms));
                 return null;
             },
             toString: () => '[built-in: chill]'
@@ -223,103 +220,89 @@ class Interpreter {
     }
 
     // ─── Run the program ────────────────────────────────────────────────────
-    run() {
-        this.execBlock(this.ast.body, this.global);
+    async run() {
+        await this.execBlock(this.ast.body, this.global);
     }
 
-    execBlock(stmts, env) {
+    async execBlock(stmts, env) {
         const prev = this.env;
         this.env = env;
         try {
             for (const stmt of stmts) {
-                this.exec(stmt);
+                await this.exec(stmt);
             }
         } finally {
             this.env = prev;
         }
     }
 
-    exec(node) {
+    async exec(node) {
         switch (node.type) {
-            case 'VarDecl': return this.execVarDecl(node);
-            case 'ConstDecl': return this.execConstDecl(node);
-            case 'Print': return this.execPrint(node);
-            case 'Input': return this.execInput(node);
-            case 'If': return this.execIf(node);
-            case 'ForLoop': return this.execFor(node);
-            case 'WhileLoop': return this.execWhile(node);
-            case 'FuncDecl': return this.execFuncDecl(node);
-            case 'ClassDecl': return this.execClassDecl(node);
-            case 'Return': throw new ReturnSignal(node.value ? this.eval(node.value) : null);
+            case 'VarDecl': return await this.execVarDecl(node);
+            case 'ConstDecl': return await this.execConstDecl(node);
+            case 'Print': return await this.execPrint(node);
+            case 'Input': return await this.execInput(node);
+            case 'If': return await this.execIf(node);
+            case 'ForLoop': return await this.execFor(node);
+            case 'WhileLoop': return await this.execWhile(node);
+            case 'FuncDecl': return await this.execFuncDecl(node);
+            case 'ClassDecl': return await this.execClassDecl(node);
+            case 'Return': throw new ReturnSignal(node.value ? await this.eval(node.value) : null);
             case 'Debug': this.onLog('System aura: immaculate'); return;
             case 'Ghost': if (typeof process !== 'undefined' && process.exit) process.exit(0); return;
-            case 'ExprStmt': return this.eval(node.expr);
+            case 'ExprStmt': return await this.eval(node.expr);
             default:
                 throw new Error(`Unknown statement type: ${node.type}`);
         }
     }
 
-    execVarDecl(node) {
-        const value = node.init ? this.eval(node.init) : null;
+    async execVarDecl(node) {
+        const value = node.init ? await this.eval(node.init) : null;
         this.env.define(node.name, value);
     }
 
-    execConstDecl(node) {
-        const value = this.eval(node.init);
+    async execConstDecl(node) {
+        const value = await this.eval(node.init);
         this.env.define(node.name, value, true);
     }
 
-    execPrint(node) {
-        const value = this.eval(node.value);
+    async execPrint(node) {
+        const value = await this.eval(node.value);
         this.onLog(this.stringify(value));
     }
 
-    execInput(node) {
+    async execInput(node) {
         const prompt = node.prompt ? node.prompt : '> ';
-        if (typeof process !== 'undefined' && process.stdout) {
-            process.stdout.write(prompt + ' ');
-            const { execSync } = require('child_process');
-            let input = '';
-            try {
-                if (process.platform === 'win32') {
-                    input = execSync('set /p x="" && echo %x%', { stdio: ['inherit', 'pipe', 'inherit'] }).toString().trim();
-                } else {
-                    input = execSync("bash -c 'read line && echo $line'", { stdio: ['inherit', 'pipe', 'inherit'] }).toString().trim();
-                }
-            } catch (_) { input = ''; }
-            this.env.define(node.name, input);
-        } else {
-            // Web/Browser fallback
-            const input = this.onInput(prompt);
-            this.env.define(node.name, input);
-        }
+        // Web/Browser fallback path is primary for this file (web/src/rizz/interpreter.js)
+        const input = await this.onInput(prompt);
+        this.env.define(node.name, input);
     }
 
-    execIf(node) {
-        const cond = this.eval(node.condition);
+    async execIf(node) {
+        const cond = await this.eval(node.condition);
         if (this.isTruthy(cond)) {
-            this.execBlock(node.thenBranch, new Environment(this.env));
+            await this.execBlock(node.thenBranch, new Environment(this.env));
         } else if (node.elseBranch) {
-            this.execBlock(node.elseBranch, new Environment(this.env));
+            await this.execBlock(node.elseBranch, new Environment(this.env));
         }
     }
 
-    execFor(node) {
-        let start = this.eval(node.start);
-        let end = this.eval(node.end);
+    async execFor(node) {
+        let start = await this.eval(node.start);
+        let end = await this.eval(node.end);
         const env = new Environment(this.env);
         env.define(node.counter, start);
         for (let i = start; i < end; i++) {
             env.set(node.counter, i);
-            this.execBlock(node.body, new Environment(env));
+            await this.execBlock(node.body, new Environment(env));
         }
     }
 
-    execWhile(node) {
+    async execWhile(node) {
         let iterations = 0;
         const MAX = 1_000_000;
-        while (this.isTruthy(this.eval(node.condition))) {
-            this.execBlock(node.body, new Environment(this.env));
+        while (this.isTruthy(await this.eval(node.condition))) {
+            await this.execBlock(node.body, new Environment(this.env));
             if (++iterations > MAX) throw new Error('Infinite loop detected — touch grass and recheck your grind condition');
         }
     }
@@ -344,37 +327,40 @@ class Interpreter {
     }
 
     // ─── Expression evaluation ───────────────────────────────────────────────
-    eval(node) {
+    async eval(node) {
         switch (node.type) {
             case 'Literal': return node.value;
-            case 'Group': return this.eval(node.expr);
+            case 'Group': return await this.eval(node.expr);
             case 'Ident': return this.env.get(node.name);
-            case 'UnaryExpr': return this.evalUnary(node);
-            case 'BinaryExpr': return this.evalBinary(node);
-            case 'CallExpr': return this.evalCall(node);
-            case 'MemberExpr': return this.evalMember(node);
-            case 'IndexExpr': return this.evalIndex(node);
-            case 'ArrayLiteral': return node.elements.map(e => this.eval(e));
-            case 'ObjectLiteral': return this.evalObject(node);
-            case 'NewExpr': return this.evalNew(node);
-            case 'Assignment': return this.evalAssign(node);
-            case 'IndexAssign': return this.evalIndexAssign(node);
-            case 'MemberAssign': return this.evalMemberAssign(node);
+            case 'UnaryExpr': return await this.evalUnary(node);
+            case 'BinaryExpr': return await this.evalBinary(node);
+            case 'CallExpr': return await this.evalCall(node);
+            case 'MemberExpr': return await this.evalMember(node);
+            case 'IndexExpr': return await this.evalIndex(node);
+            case 'ArrayLiteral':
+                const elements = [];
+                for (const e of node.elements) elements.push(await this.eval(e));
+                return elements;
+            case 'ObjectLiteral': return await this.evalObject(node);
+            case 'NewExpr': return await this.evalNew(node);
+            case 'Assignment': return await this.evalAssign(node);
+            case 'IndexAssign': return await this.evalIndexAssign(node);
+            case 'MemberAssign': return await this.evalMemberAssign(node);
             default:
                 throw new Error(`Unknown expression type: ${node.type}`);
         }
     }
 
-    evalUnary(node) {
-        const val = this.eval(node.right);
+    async evalUnary(node) {
+        const val = await this.eval(node.right);
         if (node.op === '!') return !this.isTruthy(val);
         if (node.op === '-') return -val;
         throw new Error(`Unknown unary operator: ${node.op}`);
     }
 
-    evalBinary(node) {
-        const left = this.eval(node.left);
-        const right = this.eval(node.right);
+    async evalBinary(node) {
+        const left = await this.eval(node.left);
+        const right = await this.eval(node.right);
         switch (node.op) {
             case '+': return (typeof left === 'string' || typeof right === 'string')
                 ? String(left) + String(right)
@@ -397,22 +383,23 @@ class Interpreter {
         }
     }
 
-    evalCall(node) {
-        const callee = this.eval(node.callee);
-        const args = node.args.map(a => this.eval(a));
+    async evalCall(node) {
+        const callee = await this.eval(node.callee);
+        const args = [];
+        for (const a of node.args) args.push(await this.eval(a));
 
         if (callee instanceof RizzFunction || callee instanceof BoundMethod) {
-            return callee.call(this, args);
+            return await callee.call(this, args);
         }
         if (callee && typeof callee.call === 'function') {
-            return callee.call(this, args);
+            return await callee.call(this, args);
         }
         const name = node.callee.name || node.callee.prop || '(anonymous)';
         throw new Error(`${name} is not a cook (not callable)`);
     }
 
-    evalMember(node) {
-        const obj = this.eval(node.object);
+    async evalMember(node) {
+        const obj = await this.eval(node.object);
         const prop = node.prop;
 
         if (obj instanceof RizzInstance) return obj.get(prop);
@@ -420,20 +407,20 @@ class Interpreter {
         // Array built-in props
         if (Array.isArray(obj)) {
             if (prop === 'length') return obj.length;
-            if (prop === 'push') return { call: (_, a) => { obj.push(a[0]); return obj; } };
-            if (prop === 'pop') return { call: () => obj.pop() };
-            if (prop === 'join') return { call: (_, a) => obj.join(a[0] !== undefined ? a[0] : ',') };
-            if (prop === 'reverse') { return { call: () => [...obj].reverse() }; }
+            if (prop === 'push') return { call: async (_, a) => { obj.push(a[0]); return obj; } };
+            if (prop === 'pop') return { call: async () => obj.pop() };
+            if (prop === 'join') return { call: async (_, a) => obj.join(a[0] !== undefined ? a[0] : ',') };
+            if (prop === 'reverse') { return { call: async () => [...obj].reverse() }; }
         }
 
         // String built-in props
         if (typeof obj === 'string') {
             if (prop === 'length') return obj.length;
-            if (prop === 'upper') return { call: () => obj.toUpperCase() };
-            if (prop === 'lower') return { call: () => obj.toLowerCase() };
-            if (prop === 'trim') return { call: () => obj.trim() };
-            if (prop === 'split') return { call: (_, a) => obj.split(a[0] !== undefined ? a[0] : '') };
-            if (prop === 'includes') return { call: (_, a) => obj.includes(a[0]) };
+            if (prop === 'upper') return { call: async () => obj.toUpperCase() };
+            if (prop === 'lower') return { call: async () => obj.toLowerCase() };
+            if (prop === 'trim') return { call: async () => obj.trim() };
+            if (prop === 'split') return { call: async (_, a) => obj.split(a[0] !== undefined ? a[0] : '') };
+            if (prop === 'includes') return { call: async (_, a) => obj.includes(a[0]) };
         }
 
         // Plain object
@@ -442,9 +429,9 @@ class Interpreter {
         throw new Error(`Property "${prop}" not found`);
     }
 
-    evalIndex(node) {
-        const obj = this.eval(node.object);
-        const index = this.eval(node.index);
+    async evalIndex(node) {
+        const obj = await this.eval(node.object);
+        const index = await this.eval(node.index);
         if (Array.isArray(obj)) {
             if (typeof index !== 'number') throw new Error('Array index must be a number');
             return obj[Math.floor(index)] !== undefined ? obj[Math.floor(index)] : null;
@@ -454,37 +441,38 @@ class Interpreter {
         throw new Error('Cannot index into this value');
     }
 
-    evalObject(node) {
+    async evalObject(node) {
         const obj = {};
-        node.props.forEach(p => { obj[p.key] = this.eval(p.value); });
+        for (const p of node.props) { obj[p.key] = await this.eval(p.value); }
         return obj;
     }
 
-    evalNew(node) {
+    async evalNew(node) {
         const klass = this.env.get(node.className);
         if (!(klass instanceof RizzClass)) throw new Error(`"${node.className}" is not an aura (class)`);
-        const args = node.args.map(a => this.eval(a));
-        return klass.instantiate(this, args);
+        const args = [];
+        for (const a of node.args) args.push(await this.eval(a));
+        return await klass.instantiate(this, args);
     }
 
-    evalAssign(node) {
-        const value = this.eval(node.value);
+    async evalAssign(node) {
+        const value = await this.eval(node.value);
         this.env.set(node.name, value);
         return value;
     }
 
-    evalIndexAssign(node) {
-        const obj = this.eval(node.object);
-        const index = this.eval(node.index);
-        const value = this.eval(node.value);
+    async evalIndexAssign(node) {
+        const obj = await this.eval(node.object);
+        const index = await this.eval(node.index);
+        const value = await this.eval(node.value);
         if (Array.isArray(obj)) { obj[Math.floor(index)] = value; return value; }
         if (obj && typeof obj === 'object') { obj[index] = value; return value; }
         throw new Error('Cannot index-assign to this value');
     }
 
-    evalMemberAssign(node) {
-        const obj = this.eval(node.object);
-        const value = this.eval(node.value);
+    async evalMemberAssign(node) {
+        const obj = await this.eval(node.object);
+        const value = await this.eval(node.value);
         if (obj instanceof RizzInstance) { obj.set(node.prop, value); return value; }
         if (obj && typeof obj === 'object') { obj[node.prop] = value; return value; }
         throw new Error('Cannot assign to property of this value');
@@ -509,4 +497,4 @@ class Interpreter {
     }
 }
 
-module.exports = { Interpreter };
+export { Interpreter };

@@ -1,0 +1,12 @@
+yo fam
+
+spill "Grabbing a random number from 1 to 10..."
+vibe x = rng(1, 10)
+spill "Result: " + str(x)
+
+spill "Chilling for 2 seconds..."
+chill(2000)
+
+spill "Done chilling."
+
+peace out

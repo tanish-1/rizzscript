@@ -70,10 +70,11 @@ try {
     interp.run();
 
 } catch (err) {
+    console.log(err.message);
     console.log('touch grass');
     console.log('Go outside bro 🌿');
-    if (process.env.RIZZ_DEBUG) {
-        console.log('\n[debug]', err.message);
+    if (process.env.RIZZ_DEBUG && err.stack) {
+        console.log('\n[stack trace]\n', err.stack);
     }
     process.exit(1);
 }
