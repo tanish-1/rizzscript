@@ -32,7 +32,14 @@ Built with a full **Lexer → Parser → AST → Interpreter** pipeline in pure 
 ### Run a Program
 
 ```bash
+# Run a file
 node bin/rizz.js examples/hello.rizz
+
+# Or if installed via npm (npm install -g rizzscript)
+rizz examples/hello.rizz
+
+# Install VS Code extension automatically
+rizz vscode
 ```
 
 ### Run All Examples
@@ -328,7 +335,7 @@ rizzscript/
 | CLI runner (rizz run) | 🔜 Planned |
 | Package / module system | 🔜 Planned |
 | Standard library | 🔜 Planned |
-| VS Code syntax highlighting | ✅ Done |
+| VS Code syntax highlighting | ✅ Done (`rizz vscode`) |
 | Web playground | 🔜 Planned |
 | REPL (interactive mode) | 🔜 Planned |
 

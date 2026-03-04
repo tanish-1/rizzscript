@@ -13,15 +13,28 @@ const args = process.argv.slice(2);
 
 if (args.length === 0) {
     console.log('╔═══════════════════════════════════════╗');
-    console.log('║         RizzScript v1.0.0             ║');
+    console.log('║         RizzScript v1.0.3             ║');
     console.log('║  "Compile vibes, not bugs."           ║');
     console.log('╚═══════════════════════════════════════╝');
     console.log('');
-    console.log('Usage: node bin/rizz.js <file.rizz>');
+    console.log('Usage:');
+    console.log('  rizz <file.rizz>    Run a RizzScript file');
+    console.log('  rizz vscode         Install VS Code extension (Syntax + Run button)');
     console.log('');
-    console.log('Examples:');
-    console.log('  node bin/rizz.js examples/hello.rizz');
-    console.log('  node bin/rizz.js examples/loops.rizz');
+    process.exit(0);
+}
+
+if (args[0] === 'vscode') {
+    console.log('🔥 Installing RizzScript VS Code Extension...');
+    const { execSync } = require('child_process');
+    const vsixPath = path.join(__dirname, '../vscode-rizzscript/rizzscript-1.1.0.vsix');
+    try {
+        execSync(`code --install-extension "${vsixPath}" --force`, { stdio: 'inherit' });
+        console.log('✅ VS Code extension installed successfully!');
+        console.log('Restart VS Code or open a .rizz file to see the new colors and Play button.');
+    } catch (err) {
+        console.log('❌ Failed to install VS Code extension. Is the `code` command in your PATH?');
+    }
     process.exit(0);
 }
 

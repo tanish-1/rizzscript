@@ -1,6 +1,6 @@
 {
     "name": "rizzscript",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
     "main": "src/interpreter.js",
     "bin": {
@@ -10,7 +10,8 @@
         "bin/",
         "src/",
         "examples/",
-        "README.md"
+        "README.md",
+        "vscode-rizzscript/*.vsix"
     ],
     "scripts": {
         "start": "node bin/rizz.js",
