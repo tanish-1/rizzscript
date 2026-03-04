@@ -1,6 +1,6 @@
 {
     "name": "rizzscript",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
     "main": "src/interpreter.js",
     "bin": {

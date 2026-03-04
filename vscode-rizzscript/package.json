@@ -1,14 +1,18 @@
 {
   "name": "rizzscript",
   "displayName": "RizzScript Language",
-  "description": "Syntax highlighting and language support for RizzScript (.rizz files)",
-  "version": "1.0.0",
+  "description": "Syntax highlighting, file icon, and built-in Run button for RizzScript (.rizz files)",
+  "version": "1.1.0",
   "publisher": "tanish-1",
   "engines": {
     "vscode": "^1.75.0"
   },
   "categories": [
     "Programming Languages"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:rizz"
   ],
   "contributes": {
     "languages": [
@@ -33,6 +37,37 @@
         "language": "rizz",
         "scopeName": "source.rizz",
         "path": "./syntaxes/rizz.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "rizzscript.runFile",
+        "title": "Run RizzScript File",
+        "icon": "$(play)",
+        "category": "RizzScript"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "rizzscript.runFile",
+          "when": "resourceExtname == .rizz",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "rizzscript.runFile",
+          "when": "resourceExtname == .rizz",
+          "group": "rizzscript"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "rizzscript.runFile",
+        "key": "ctrl+shift+r",
+        "when": "resourceExtname == .rizz"
       }
     ]
   }
