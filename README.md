@@ -4,6 +4,7 @@
 
 ### *A programming language that compiles vibes, not bugs.*
 
+[![Weekly Downloads](https://img.shields.io/npm/dw/rizzscript?label=Weekly%20Downloads&style=for-the-badge&color=7b61ff)](https://www.npmjs.com/package/rizzscript)
 ![npm](https://img.shields.io/badge/npm-rizzscript-red?style=for-the-badge)
 ![language](https://img.shields.io/badge/language-Gen--Z-pink?style=for-the-badge)
 ![vibes](https://img.shields.io/badge/vibes-immaculate-brightgreen?style=for-the-badge)

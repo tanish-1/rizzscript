@@ -1,29 +1,28 @@
 {
     "name": "rizzscript",
-    "version": "1.2.4",
+    "version": "1.2.8",
     "description": "A programming language that compiles vibes, not bugs. Gen-Z slang meets real programming.",
-    "main": "src/interpreter.js",
+    "main": "core/interpreter.js",
     "bin": {
-        "rizz": "bin/rizz.js"
+        "rizz": "cli/rizz.js"
     },
     "files": [
-        "bin/",
-        "src/",
+        "cli/",
+        "core/",
         "examples/",
-        "README.md",
-        "vscode-rizzscript/rizzscript-1.1.1.vsix"
+        "README.md"
     ],
     "scripts": {
-        "start": "node bin/rizz.js",
-        "postinstall": "code --install-extension ./vscode-rizzscript/rizzscript-1.1.1.vsix --force || echo 'VS Code CLI not found, manually install vscode-rizzscript/rizzscript-1.1.1.vsix'",
-        "test:hello": "node bin/rizz.js examples/hello.rizz",
-        "test:vars": "node bin/rizz.js examples/variables.rizz",
-        "test:cond": "node bin/rizz.js examples/conditionals.rizz",
-        "test:loops": "node bin/rizz.js examples/loops.rizz",
-        "test:funcs": "node bin/rizz.js examples/functions.rizz",
-        "test:class": "node bin/rizz.js examples/classes.rizz",
-        "test:arrays": "node bin/rizz.js examples/arrays.rizz",
-        "test:error": "node bin/rizz.js examples/errors.rizz"
+        "start": "node cli/rizz.js",
+        "postinstall": "code --install-extension tanish-1.rizzscript --force || echo 'VS Code CLI not found. Install manually: https://marketplace.visualstudio.com/items?itemName=tanish-1.rizzscript'",
+        "test:hello": "node cli/rizz.js examples/hello.rizz",
+        "test:vars": "node cli/rizz.js examples/variables.rizz",
+        "test:cond": "node cli/rizz.js examples/conditionals.rizz",
+        "test:loops": "node cli/rizz.js examples/loops.rizz",
+        "test:funcs": "node cli/rizz.js examples/functions.rizz",
+        "test:class": "node cli/rizz.js examples/classes.rizz",
+        "test:arrays": "node cli/rizz.js examples/arrays.rizz",
+        "test:error": "node cli/rizz.js examples/errors.rizz"
     },
     "engines": {
         "node": ">=14"
